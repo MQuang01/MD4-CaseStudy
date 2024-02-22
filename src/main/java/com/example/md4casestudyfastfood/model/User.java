@@ -36,10 +36,12 @@ public class User {
     )
     private List<Role> roles = new ArrayList<>();
 
-
-
     @OneToMany(mappedBy = "user")
     private List<Order> orders = new ArrayList<>();
+
+    public void addRole(Role role) {
+        roles.add(role);
+    }
 
     public UserResDto toUserResDto() {
         List<RoleResDto> roleResDtos = roles.stream().map(Role::toRoleResDto).collect(Collectors.toList());
