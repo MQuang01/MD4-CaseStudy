@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Discount extends BaseEntity {
+public class Discount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
