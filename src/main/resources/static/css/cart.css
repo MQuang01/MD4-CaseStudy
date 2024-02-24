@@ -1,0 +1,11 @@
+.shopping-cart-box {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 99;
+    background-color: #fff;
+    width: 300px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: none;
+}
