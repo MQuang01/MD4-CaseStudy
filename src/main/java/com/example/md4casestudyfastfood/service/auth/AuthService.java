@@ -2,6 +2,7 @@ package com.example.md4casestudyfastfood.service.auth;
 import com.example.md4casestudyfastfood.model.CustomUserDetails;
 import com.example.md4casestudyfastfood.model.Role;
 import com.example.md4casestudyfastfood.model.User;
+import com.example.md4casestudyfastfood.model.dto.req.LoginReqDto;
 import com.example.md4casestudyfastfood.model.dto.req.RegisterReqDto;
 import com.example.md4casestudyfastfood.repository.IRoleRepository;
 import com.example.md4casestudyfastfood.repository.IUserRepository;
@@ -43,5 +44,14 @@ public class AuthService implements UserDetailsService,IAuthService {
         user.setEmail(registerReqDto.getEmail());
         user.setPassword(passwordEncoder.encode(registerReqDto.getPassword()));
         userRepository.save(user);
+    }
+
+    @Override
+    public String login(LoginReqDto loginReqDto) {
+        UserDetails userDetails = loadUserByUsername(loginReqDto.getEmail());
+        if (!passwordEncoder.matches(loginReqDto.getPassword(), userDetails.getPassword())) {
+            throw new IllegalStateException("Wrong password or username");
+        }
+        return jwTokenProvider.generateToken(userDetails.getUsername());
     }
 }

@@ -1,5 +1,6 @@
 package com.example.md4casestudyfastfood.controller.restcontroller;
 
+import com.example.md4casestudyfastfood.model.dto.req.LoginReqDto;
 import com.example.md4casestudyfastfood.model.dto.req.RegisterReqDto;
 import com.example.md4casestudyfastfood.service.auth.IAuthService;
 import lombok.AllArgsConstructor;
@@ -18,5 +19,13 @@ public class AuthRestController {
     public ResponseEntity<Void> save(@RequestBody RegisterReqDto registerReqDto){
         authService.save(registerReqDto);
         return ResponseEntity.ok().build();
+    }
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginReqDto loginReqDto) {
+        try {
+            return ResponseEntity.ok(authService.login(loginReqDto));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 }
